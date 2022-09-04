@@ -11,6 +11,7 @@ float floats(float f1,float f2){
 }
 
 int main(int argc,char *argv[]){
+	printf("\033[42;30m\n");
 	if(argc>2)printf("%f\n",floats(atof(argv[1]),atof(argv[2])));
 	return 0;
 }
