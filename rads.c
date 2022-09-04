@@ -3,7 +3,6 @@
 #include<string.h>
 #include<time.h>
 //clang  -c -o rands.bc -emite-llvm rads.c
-//lli rands.bc
 int i[]={511,255};
 int rad(int iii){
 	int ii=0;
@@ -16,6 +15,7 @@ int rad(int iii){
 }
 
 int main(int argc,char *argv[]){
+	printf("\033[42;30m\n");
 	if(argc>1)printf("%d\n",rad(atoi(argv[1])));
 	return 0;
 }
