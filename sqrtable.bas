@@ -8,7 +8,7 @@ dim ww as integer=10
 dim lline as integer=10
 color 0,2
 
-print "int divs[]={"
+print "int sqrs[]={"
 d=0
 	for a=0 to w
 		print "";
