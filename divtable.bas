@@ -16,7 +16,7 @@ for b=0 to ww
 		if b=0 then 
 			print 0;
 		else
-			print int(a\b) ;
+			print int(b/a) ;
 		end if
 		print ",";
 		d=d+1
