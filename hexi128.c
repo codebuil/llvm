@@ -52,23 +52,23 @@ char hexss[]={
 70,53,70,54,70,55,70,56,70,57,
 70,65,70,66,70,67,70,68,70,69,
 70,70,0};
-char hexi64(long a,int b,int c){
-	long aaa=c+c+c+c;
-	//printf("%i\n",(56-(aaa+aaa)));
-	long aa=(a>>(56-(aaa+aaa))) & 255;
+char hexi128(long long a,int b,int c){
+	long long aaa=c+c+c+c;
+	//printf("%llu\n",(120-(aaa+aaa)));
+	long long aa=(a>>(120-(aaa+aaa))) & 255;
 	return hexss[aa+aa+b];
 }
 int main(){
-	long n;
+	long long n;
 	int nn;
 	int nnn;
 	puts("\ec\e[42;30m;");
 	for(n=0;n<1024;n++){
 		printf("0x");
-		for(nnn=0;nnn<8;nnn++){
+		for(nnn=0;nnn<16;nnn++){
 			for(nn=0;nn<2;nn++){
-				putc(hexi64(n,nn,nnn),stdout);
-				//hexi64(n,nn,nnn);
+				putc(hexi128(n,nn,nnn),stdout);
+				//hexi128(n,nn,nnn);
 			}
 		}
 		puts("");
