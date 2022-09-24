@@ -1,4 +1,10 @@
 #include<stdio.h>
+#include <stddef.h>
+#include <stdint.h>
+struct ints128{
+	uint64_t n1;
+	uint64_t n2;
+};
 char hexss[]={
 48,48,48,49,48,50,48,51,48,52,
 48,53,48,54,48,55,48,56,48,57,
@@ -52,17 +58,29 @@ char hexss[]={
 70,53,70,54,70,55,70,56,70,57,
 70,65,70,66,70,67,70,68,70,69,
 70,70,0};
-char hexi128(uint128_t a,int b,int c){
-	uint128_t aaa=c+c+c+c;
-	uint128_t aa=(a>>(120-(aaa+aaa))) & 255;
+char hexi128(struct ints128 a,int b,int c){
+	uint64_t aaa;
+	uint64_t aa;
+	uint64_t cc;
+	if(c<8){
+		cc=c;
+		aaa=cc+cc+cc+cc;
+		aa=(a.n2>>(56-(aaa+aaa))) & 255;
+	}else{
+		cc=c-8;
+		aaa=cc+cc+cc+cc;
+		aa=(a.n1>>(56-(aaa+aaa))) & 255;
+	}
 	return hexss[(int)aa+aa+b];
 }
 int main(){
-	uint128_t n;
+	struct ints128 n;
+	n.n1=0;
+	n.n2=0;
 	int nn;
 	int nnn;
 	puts("\ec\e[42;30m;");
-	for(n=0;n<1024;n++){
+	for(n.n1=0;n.n1<1024;n.n1++){
 		printf("0x");
 		for(nnn=0;nnn<16;nnn++){
 			for(nn=0;nn<2;nn++){
@@ -71,6 +89,5 @@ int main(){
 		}
 		puts("");
 	}
-	n=0xffffffffffffffffffffffffffffffff;
 	return 0;
 }
