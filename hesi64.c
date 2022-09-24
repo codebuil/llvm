@@ -54,21 +54,21 @@ char hexss[]={
 70,53,70,54,70,55,70,56,70,57,
 70,65,70,66,70,67,70,68,70,69,
 70,70,0};
-char hexi(uint32_t a,int b,int c){
-	
-	uint32_t aa=(a>>(24-(c+c+c+c+c+c+c+c))) & 255;
+char hexi64(uint64_t a,int b,int c){
+	uint64_t aaa=c+c+c+c;
+	uint64_t aa=(a>>(56-(aaa+aaa))) & 255;
 	return hexss[(int)aa+aa+b];
 }
 int main(){
-	uint32_t n;
+	uint64_t n;
 	int nn;
 	int nnn;
 	puts("\ec\e[42;30m;");
 	for(n=0;n<1024;n++){
 		printf("0x");
-		for(nnn=0;nnn<4;nnn++){
+		for(nnn=0;nnn<8;nnn++){
 			for(nn=0;nn<2;nn++){
-				putc(hexi(n,nn,nnn),stdout);
+				putc(hexi64(n,nn,nnn),stdout);
 			}
 		}
 		puts("");
