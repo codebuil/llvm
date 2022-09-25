@@ -103,7 +103,7 @@ struct ints128 mult128(struct ints128 a,struct ints128 b){
 	a3=a3*b3;
 	c0= a1>>32 & 0xffffffff;
 	c1=a1<<32;
-	c2=a1;
+	c2=a0;
 	if(c2<c1)c2=c1;
 	aa.n1=a0 +c1;
 	if (aa.n1<c2){
