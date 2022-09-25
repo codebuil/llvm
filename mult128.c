@@ -83,6 +83,10 @@ struct ints128 mult128(struct ints128 a,struct ints128 b){
 	uint64_t b1;
 	uint64_t b2;
 	uint64_t b3;
+	uint64_t c0;
+	uint64_t c1;
+	uint64_t c2;
+	uint64_t c3;
 	uint64_t bb;
 	uint64_t aaa=0;
 	a0=a.n1 & 0xffffffff;
@@ -93,12 +97,13 @@ struct ints128 mult128(struct ints128 a,struct ints128 b){
 	b2=b.n2 & 0xffffffff;
 	a3=a.n2 >> 32 & 0xffffffff;
 	b3=b.n2 >> 32 & 0xffffffff;
-	a0=a0*b0;
-	a1=a1*b1+(a0>> 32);
-	a2=a2*b2+(a1>> 32);
-	a3=a3*b3+(a2>> 32);
-	aa.n1=a0 | a1<<32;
-	aa.n2=a2 | a3<<32;
+	c0=a0*b0;
+	a1=a1*b1;
+	a2=a2*b2;
+	a3=a3*b3;
+	c0= a1>>32 & 0xffffffff;
+	aa.n1=a0 +( a1<<32);
+	aa.n2=a2 +( a3<<32)+c0;
 	return aa;
 } 
 int main(){
