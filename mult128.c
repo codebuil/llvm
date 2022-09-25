@@ -97,7 +97,7 @@ struct ints128 mult128(struct ints128 a,struct ints128 b){
 	b2=b.n2 & 0xffffffff;
 	a3=a.n2 >> 32 & 0xffffffff;
 	b3=b.n2 >> 32 & 0xffffffff;
-	c0=a0*b0;
+	a0=a0*b0;
 	a1=a1*b1;
 	a2=a2*b2;
 	a3=a3*b3;
