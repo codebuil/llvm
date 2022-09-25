@@ -102,8 +102,16 @@ struct ints128 mult128(struct ints128 a,struct ints128 b){
 	a2=a2*b2;
 	a3=a3*b3;
 	c0= a1>>32 & 0xffffffff;
-	aa.n1=a0 +( a1<<32);
-	aa.n2=a2 +( a3<<32)+c0;
+	c1=a1<<32;
+	c2=a1;
+	if(c2<c1)c2=c1;
+	aa.n1=a0 +c1;
+	if (aa.n1<c2){
+		c2=1;
+	}else{
+		c2=0;
+	}
+	aa.n2=a2 +( a3<<32)+c0+c2;
 	return aa;
 } 
 int main(){
