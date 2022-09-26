@@ -105,9 +105,11 @@ struct ints256 sub256(struct ints256 a,struct ints256 b){
 	aa.n1=a.n1-b.n1;
 	bb=b.n2;
 	if(aaa!=0)bb++;
+	if(a.n2<bb)aaa2=1;
 	aa.n2=a.n2-bb;
 	bb=b.n3;
 	if(aaa2!=0)bb++;
+	if(a.n3<bb)aaa3=1;	
 	aa.n3=a.n3-bb;
 	bb=b.n4;
 	if(aaa3!=0)bb++;
