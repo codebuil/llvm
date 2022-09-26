@@ -124,13 +124,36 @@ struct ints256 mults256(struct ints256 a,int b){
 }
 struct ints256 rolls256(struct ints256 a,int b){
 		struct ints256 aa;
-		aa.n1=a.n1<<b;
-		aa.n2=a.n1>>(64-b);
-		aa.n2=aa.n2+(a.n2<<b);
-		aa.n3=a.n2>>(64-b);
-		aa.n3=aa.n3+(a.n3<<b);
-		aa.n4=a.n3>>(64-b);
-		aa.n4=aa.n4+(a.n4<<b);
+		if(b<64){
+			aa.n1=a.n1<<b;
+			aa.n2=a.n1>>(64-b);
+			aa.n2=aa.n2+(a.n2<<b);
+			aa.n3=a.n2>>(64-b);
+			aa.n3=aa.n3+(a.n3<<b);
+			aa.n4=a.n3>>(64-b);
+			aa.n4=aa.n4+(a.n4<<b);
+		}
+		if(b>63 & b < 64*2){
+			aa.n1=0;
+			aa.n2=a.n1<<(b-64);
+			aa.n3=aa.n1>>(64-(b-64));
+			aa.n3=aa.n3+(a.n2<<b-64);
+			aa.n4=aa.n2>>(64-(b-64));
+			aa.n4=aa.n4+(a.n3<<b-64);
+		}
+		if(b>64*2-1 & b < 64*3){
+			aa.n1=0;
+			aa.n2=0;
+			aa.n3=a.n1<<b-(64*2);
+			aa.n4=aa.n1>>(64-(b-64*2));
+			aa.n4=aa.n4+(a.n2<<b-(64*2));
+		}
+		if(b>64*3-1 & b < 64*4){
+			aa.n1=0;
+			aa.n2=0;
+			aa.n3=0;
+			aa.n4=a.n1<<b-(64*3);
+		}
 		return aa;
 }
 struct ints256 mult256(struct ints256 a,struct ints256 b){
@@ -154,17 +177,17 @@ struct ints256 mult256(struct ints256 a,struct ints256 b){
 		}
 		if(i>63 & i<64*2){
 			bb=mults256(a,b.n2 & s);
-			bb=rolls256(bb,i-64);
+			bb=rolls256(bb,i);
 			aa=add256(aa,bb);
 		}
 		if(i>64*2-1 & i<64*3){
 			bb=mults256(a,b.n3 & s);
-			bb=rolls256(bb,i-64*2);
+			bb=rolls256(bb,i);
 			aa=add256(aa,bb);
 		}
 		if(i>64*3-1 & i<64*4){
 			bb=mults256(a,b.n4 & s);
-			bb=rolls256(bb,i-64*3);
+			bb=rolls256(bb,i);
 			aa=add256(aa,bb);
 		}
 
