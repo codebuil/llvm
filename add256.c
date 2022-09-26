@@ -99,8 +99,9 @@ struct ints256 add256(struct ints256 a,struct ints256 b){
 	aa.n3=0;
 	aa.n4=0;
 	if(aaa<a.n1)aaa=a.n1;
-	if(aaa2<a.n2)aaa=a.n2;
-	if(aaa3<a.n3)aaa=a.n3;	
+	if(aaa2<a.n2)aaa2=a.n2;
+	if(aaa3<a.n3)aaa3=a.n3;	
+	if(aaa4<a.n3)aaa4=a.n4;	
 	aa.n1=a.n1+b.n1;
 	aa.n2=a.n2+b.n2;
 	if(aa.n1<aaa)aa.n2++;
@@ -114,14 +115,14 @@ struct ints256 add256(struct ints256 a,struct ints256 b){
 int main(){
 	struct ints256 n;
 	struct ints256 n1;
-	n.n1=0xfffffffffffffff8;
-	n.n2=0xfffffffffffffff8;
+	n.n1=0;
+	n.n2=0;
 	n.n3=0xfffffffffffffff8;
 	n.n4=0x0;
-	n1.n1=0x1;
-	n1.n2=0x1;
+	n1.n1=0x0;
+	n1.n2=0x0;
 	n1.n3=0x1;
-	n1.n4=0x1;
+	n1.n4=0x0;
 	int nn;
 	int nnn;
 	int nnnn;
