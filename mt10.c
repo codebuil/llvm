@@ -93,9 +93,16 @@ struct ints128 mults128(struct ints128 a,int b){
 }
 struct ints128 rolls128(struct ints128 a,int b){
 		struct ints128 aa;
-		aa.n1=a.n1<<b;
-		aa.n2=a.n1>>(64-b);
-		aa.n2=aa.n2+(a.n2<<b);
+		if(b<64){
+			aa.n1=a.n1<<b;
+			aa.n2=a.n1>>(64-b);
+			aa.n2=aa.n2+(a.n2<<b);
+		}else{
+			aa.n1=0;
+			aa.n2=a.n1<<b;
+			aa.n2=a.n1>>(64-(b-64));
+			aa.n2=aa.n2+(a.n2<<b);
+		}
 		return aa;
 }
 struct ints128 mult128(struct ints128 a,struct ints128 b){
@@ -114,7 +121,7 @@ struct ints128 mult128(struct ints128 a,struct ints128 b){
 			aa=add128(aa,bb);
 		}else{
 			bb=mults128(a,b.n2 & s);
-			bb=rolls128(bb,i-64);
+			bb=rolls128(bb,i);
 			aa=add128(aa,bb);
 		}
 		s=s<<1;
@@ -133,7 +140,7 @@ int main(){
 	n2.n1=10;
 	n2.n2=0x0;
 	puts("\ec\e[42;30m;");
-	for(nnnn=0;nnnn<38;nnnn++){
+	for(nnnn=0;nnnn<32;nnnn++){
 		printf("0x");
 		for(nnn=0;nnn<16;nnn++){
 			for(nn=0;nn<2;nn++){
